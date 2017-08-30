@@ -45,7 +45,8 @@ def project(request, project_id):
         # print(request.body)
         project.name = data['name']
         project.description = data['description']
-        project.collaborators = data['collaborators']
+        if 'collaborators' in data:
+            project.collaborators = data['collaborators']
         project.save()
 
         graph.representation = json.dumps(data['representation'])

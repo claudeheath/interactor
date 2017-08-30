@@ -2,6 +2,7 @@
   "id": 2,
   "name": "My first project",
   "description": "This is the description of my project",
+  "collaborators" : "",
   "representation": {
     "nodes": [
       {
@@ -21,7 +22,7 @@
         "y": 150,
         "size": 50,
         "opacity": 70,
-        "imageUrl": "http://localhost:8005/media/node_images/3/troubleshooter.jpg"
+        "imageUrl": "http://localhost:8000/media/node_images/1/0e292970-9478-4b3a-a735-022c805f2114_UJpAuLK.jpg"
       },
       {
         "id": 4,

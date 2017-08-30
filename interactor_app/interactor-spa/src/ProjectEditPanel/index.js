@@ -19,6 +19,7 @@ class ProjectEditPanel extends Component {
   }
 
   render() {
+    const hasCollaborators = this.props.state.project.collaborators !== undefined
     return (
       <div className="ispa-sidebar-form">
         <div className="ispa-project-edit-panel">
@@ -32,7 +33,7 @@ class ProjectEditPanel extends Component {
               <div><textarea rows="10" cols="40" value={this.props.state.project.description} onChange={this.handleProjectDescriptionChange.bind(this)} /></div>
             </div>
 
-            {this.props.state.project.collaborators ?
+            {hasCollaborators ?
               <div className="ispa-item">
                 <div>Who can edit this project? (Enter email addresses separated by commas)</div>
                 <div><textarea rows="10" cols="40" value={this.props.state.project.collaborators} onChange={this.handleProjectCollaboratorsChange.bind(this)} /></div>
