@@ -41,7 +41,7 @@ def project(request, project_id):
         graph = project.graph_set.get(version=1)
 
         #TODO clean (using form?)
-        data = json.loads(request.body)
+        data = json.loads(request.body.decode('utf-8'))
         # print(request.body)
         project.name = data['name']
         project.description = data['description']
