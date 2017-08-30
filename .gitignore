@@ -1,0 +1,8 @@
+venv
+*.pyc
+staticfiles
+.env
+/static
+media
+
+node_modules
