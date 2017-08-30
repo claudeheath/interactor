@@ -1,0 +1,15 @@
+.ispa-app-wrapper {
+  font-family: sans-serif;
+  font-size: 14px;
+}
+
+.ispa-app-wrapper .ispa-button {
+  border: 1px solid #aaa;
+  background-color: #ccc;
+  padding: 10px;
+  display: inline-block;
+}
+
+.ispa-app-wrapper .ispa-button:hover {
+  background-color: #aaa;
+}

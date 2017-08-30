@@ -1,0 +1,7 @@
+.ispa-slider-control line {
+  stroke: #ccc;
+  stroke-width: 2;
+}
+.ispa-slider-control circle {
+  fill: #333;
+}

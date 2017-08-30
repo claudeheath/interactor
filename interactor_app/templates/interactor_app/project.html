@@ -1,0 +1,36 @@
+{% extends "interactor_app/base.html" %}
+{% load staticfiles %}
+
+{% block css %}
+<link href="{% static "interactor_app/css/project.css" %}" rel="stylesheet">
+<link href="{% static "interactor_app/css/interactor-spa.css" %}" rel="stylesheet">
+{% endblock %}
+
+
+{% block content %}
+<!-- <div id="save">SAVE!</div> -->
+{% endblock %}
+
+
+{% block sidebar %}
+<!-- <form action="{% url 'project' project.id %}" method="post">
+{% csrf_token %}
+  {{form}}
+</form>
+
+<div><a href="{% url 'dashboard' %}">Back to dashboard</a></div> -->
+{% endblock %}
+
+
+{% block javascript %}
+<script src="{% static 'interactor_app/js/vendor/d3.v4.min.js' %}"></script>
+<script src="{% static 'interactor_app/js/vendor/js.cookie.js' %}"></script>
+<script src="{% static 'interactor_app/js/interactor-spa.js' %}"></script>
+
+<script>
+window.interactor.spa.load({
+  projectUrl: '/api/project/{{ project.id }}/'
+})
+
+</script>
+{% endblock %}

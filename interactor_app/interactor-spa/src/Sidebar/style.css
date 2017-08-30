@@ -1,0 +1,27 @@
+.ispa-sidebar {
+  width: 300px;
+  padding: 20px;
+  box-sizing: border-box;
+
+  position: absolute;
+
+  right: 0;
+  top: 0;
+  bottom: 0;
+  /*height: 100%;*/
+
+  background-color: #eee;
+  border-left: 1px solid #ddd;
+}
+
+.ispa-sidebar .ispa-sidebar-form {
+}
+
+.ispa-sidebar .ispa-sidebar-form .ispa-item {
+  margin: 20px 0;
+}
+
+.ispa-sidebar .ispa-sidebar-form input, .ispa-sidebar .ispa-sidebar-form textarea {
+  padding: 5px;
+  max-width: 240px;
+}

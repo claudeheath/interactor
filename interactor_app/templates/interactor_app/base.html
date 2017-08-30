@@ -1,0 +1,55 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}{% endblock %}</title>
+  <link href="{% static "interactor_app/css/interactor.css" %}" rel="stylesheet">
+  {% block css %}{% endblock %}
+</head>
+<body>
+
+<!-- content -->
+<div id="content">
+  {% block content %}
+  {% endblock %}
+</div>
+<!-- end content -->
+
+
+<!-- sidebar -->
+<div id="sidebar">
+  {% block sidebar %}
+  {% endblock %}
+
+  <div id="user">
+    {% if request.user.is_authenticated %}
+      You're logged in as {{ request.user.username }}
+      <a href="{% url "logout" %}">Logout</a>
+    {% else %}
+      <a href="{% url "login" %}">Log-in</a>
+      <a href="{% url "register" %}">Register</a>
+    {% endif %}
+  </div>
+
+  {% if messages %}
+  <ul class="messages">
+      {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+  </ul>
+  {% endif %}
+</div>
+<!-- end sidebar -->
+
+
+<!-- spa container -->
+<div id="interactor-spa-root"></div>
+
+
+<!-- javascript -->
+{% block javascript %}{% endblock %}
+
+
+</body>
+</html>

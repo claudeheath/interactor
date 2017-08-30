@@ -1,0 +1,15 @@
+{% extends "interactor_app/base.html" %}
+
+{% block content %}
+{% if project_list %}
+  <ul>
+  {% for project in project_list %}
+    <li>{{ project.name }} <a href="{% url 'project' project.id %}">Open</a></li>
+  {% endfor %}
+  </ul>
+{% else %}
+  <p>No projects yet</p>
+{% endif %}
+
+<a href="{% url 'new-project' %}">New project</a>
+{% endblock %}

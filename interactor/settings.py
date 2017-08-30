@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 import environ
+from django.core.urlresolvers import reverse_lazy
 
 root = environ.Path(__file__) - 2
 env = environ.Env(DEBUG=(bool, False),)
@@ -35,6 +36,9 @@ ALLOWED_HOSTS = env('ALLOWED_HOSTS').split(',') #env('ALLOWED_HOSTS')
 # Application definition
 
 INSTALLED_APPS = [
+    'account',
+    'interactor_app',
+    'interactor_api',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -66,6 +70,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                # https://simpleisbetterthancomplex.com/tutorial/2016/08/01/how-to-upload-files-with-django.html
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -123,6 +129,10 @@ STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+LOGIN_REDIRECT_URL = reverse_lazy('dashboard')
+LOGIN_URL = reverse_lazy('login')
+LOGOUT_URL = reverse_lazy('logout')
 
 
 LOGGING = {

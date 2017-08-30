@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Log-in{% endblock %}
+
+{% block content %}
+  <p>Please log into InterActor using the following form:</p>
+
+  {% if form.errors %}
+    <p>Your username and password didn't match. Please try again.</p>
+  {% endif %}
+
+  <div class="login-form">
+    <form action="{% url "login" %}" method="post">
+      {{ form.as_p }}
+      {% csrf_token %}
+      <input type="hidden" name="next" value="{{ next }}" />
+      <p><input type="submit" value="Log-in"></p>
+    </form>
+  </div>
+  <p><a href="{% url "home" %}">Back to homepage</a></p>
+{% endblock %}

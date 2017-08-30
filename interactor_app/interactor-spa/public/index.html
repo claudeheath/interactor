@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#000000">
+    <link href="./style.css" rel="stylesheet">
+    <title>Interactor SPA Development App</title>
+  </head>
+  <body>
+    <noscript>
+      You need to enable JavaScript to run this app.
+    </noscript>
+    <div id="interactor-spa-root"></div>
+
+    <script>
+// var testProjectData = {
+//   "id": 2,
+//   "name": "My first project",
+//   "description": "This is the description of my project",
+//   // "collaborators": "me@example.com",
+//   "representation": {
+//     "nodes": [
+//       {
+//         "id": 1,
+//         "name": 'Node A',
+//         "description": 'Node A description',
+//         "x": 100,
+//         "y": 100,
+//         "size": 30,
+//         "opacity": 80
+//       },
+//       {
+//         "id": 2,
+//         "name": 'Node B',
+//         "description": 'Node B description',
+//         "x": 300,
+//         "y": 150,
+//         "size": 50,
+//         "opacity": 70
+//       },
+//       {
+//         "id": 4,
+//         "name": 'Node C',
+//         "description": 'Node C description',
+//         "x": 300,
+//         "y": 350,
+//         "size": 20,
+//         "opacity": 100
+//       }
+//     ],
+//     "links": [
+//       {id: 1, source: 1, target: 2, name: 'My link', description: 'Link description', width: 5, opacity: 80},
+//       {id: 2, source: 1, target: 4, name: 'Another link', description: 'Link description', width: 10, opacity: 80}
+//     ]
+//   }
+// }
+
+window.onload = function() {
+  // window.interactor.spa.load(testProjectData)
+  window.interactor.spa.load({
+    projectUrl: './testProjectData.json'
+  })
+}
+    </script>
+  </body>
+</html>

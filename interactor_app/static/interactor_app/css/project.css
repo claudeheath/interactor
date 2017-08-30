@@ -1,0 +1,4 @@
+/* Make way for SPA */
+#content, #sidebar {
+  display: none;
+}

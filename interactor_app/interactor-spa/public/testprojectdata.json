@@ -1,0 +1,41 @@
+{
+  "id": 2,
+  "name": "My first project",
+  "description": "This is the description of my project",
+  "representation": {
+    "nodes": [
+      {
+        "id": 1,
+        "name": "Node A",
+        "description": "Node A description",
+        "x": 100,
+        "y": 100,
+        "size": 30,
+        "opacity": 80
+      },
+      {
+        "id": 2,
+        "name": "Node B",
+        "description": "Node B description",
+        "x": 300,
+        "y": 150,
+        "size": 50,
+        "opacity": 70,
+        "imageUrl": "http://localhost:8005/media/node_images/3/troubleshooter.jpg"
+      },
+      {
+        "id": 4,
+        "name": "Node C",
+        "description": "Node C description",
+        "x": 300,
+        "y": 350,
+        "size": 20,
+        "opacity": 100
+      }
+    ],
+    "links": [
+      {"id": 1, "source": 1, "target": 2, "name": "My link", "description": "Link description", "width": 5, "opacity": 80},
+      {"id": 2, "source": 1, "target": 4, "name": "Another link", "description": "Link description", "width": 10, "opacity": 80}
+    ]
+  }
+}
