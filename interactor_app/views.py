@@ -33,43 +33,19 @@ def dashboard(request):
 
     return HttpResponse(template.render(context, request))
 
+
 @login_required
 def project(request, project_id):
 
-    #TODO deal with invalid id  (see https://docs.djangoproject.com/en/1.11/intro/tutorial04/)
     project = Project.objects.get(pk=project_id)
-    graph = project.graph_set.get(version=1)
 
-    if request.method == 'POST':
-        form = ProjectForm(request.POST)
-        if form.is_valid():
-            project.name = form.cleaned_data['name']
-            project.description = form.cleaned_data['description']
-            project.collaborators = form.cleaned_data['collaborators']
-            project.save()
-            graph.representation = form.cleaned_data['representation']
-            graph.save()
-            messages.success(request, u'Project saved!')
-
-        return render(request, 'interactor_app/project.html', {
-            'project': project,
-            'graph': graph,
-            'form': form
-        })
-
-    form = ProjectForm(initial={
-        'name': project.name,
-        'description': project.description,
-        'collaborators': project.collaborators,
-        'representation': graph.representation
-    })
+    #TODO deal with invalid id  (see https://docs.djangoproject.com/en/1.11/intro/tutorial04/)
+    if not(project.user.id == request.user.id or project.is_collaborator(request.user.email)):
+        raise Http404("You don't have authorisation to open this project")
 
     return render(request, 'interactor_app/project.html', {
         'project': project,
-        'graph': graph,
-        'form': form
     })
-
 
 
 @login_required

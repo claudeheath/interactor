@@ -34,6 +34,7 @@ class Sidebar extends Component {
         <div className="ispa-sidebar-form">
           <div className="ispa-item">
             <div className="ispa-button" onClick={this.handleSaveClick.bind(this)}>Save project</div>
+            {this.props.state.projectSaveVersionHasChanged ? <div>Someone else has saved this project. You can continue to edit but if you save this project it will overwrite their changes. You can load the latest version by clicking your browser's refresh button.</div> : null}
           </div>
 
           <div className="ispa-item">

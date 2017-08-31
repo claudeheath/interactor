@@ -18,15 +18,16 @@ def project(request, project_id):
         raise Http404
 
     if request.method == 'GET':
-        graph = project.graph_set.get(version=1)
-
         if not(project.user.id == request.user.id or project.is_collaborator(request.user.email)):
             raise Http404
 
+        # Until we implement project history, always use version 1 of the graph
+        graph = project.graph_set.get(version=1)
 
         data = {
             'id': project.id,
             'name': project.name,
+            'save_version': project.save_version,
             'description': project.description,
             'representation': json.loads(graph.representation)
         }
@@ -38,11 +39,12 @@ def project(request, project_id):
         return JsonResponse(data)
 
     elif request.method == 'POST':
+
         graph = project.graph_set.get(version=1)
 
-        #TODO clean (using form?)
+        #TODO clean?
         data = json.loads(request.body.decode('utf-8'))
-        # print(request.body)
+        project.save_version = project.save_version + 1
         project.name = data['name']
         project.description = data['description']
         if 'collaborators' in data:
@@ -52,7 +54,9 @@ def project(request, project_id):
         graph.representation = json.dumps(data['representation'])
         graph.save()
 
-        data = {}
+        data = {
+            'save_version': project.save_version,
+        }
         return JsonResponse(data)
 
 
@@ -122,4 +126,25 @@ def delete_node_image(request, project_id, node_id):
     data = {
         "status": "success"
     }
+    return JsonResponse(data)
+
+
+@login_required
+def get_project_version(request, project_id):
+
+    if not request.is_ajax():
+        raise Http404
+
+    if not request.method == 'GET':
+        raise Http404
+
+    project = Project.objects.get(pk=project_id)
+
+    if not(project.user.id == request.user.id or project.is_collaborator(request.user.email)):
+        raise Http404
+
+    data = {
+        'save_version': project.save_version,
+    }
+
     return JsonResponse(data)

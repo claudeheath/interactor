@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import * as d3 from 'd3';
 
 import './style.css'
 
@@ -13,10 +12,8 @@ class GraphViewTooltip extends Component {
     }
 
     if(t.active) {
-      // style.top = t.d.y + 'px'
-      // style.left = t.d.x + 'px'
-      style.top = d3.event.y + 'px'
-      style.left = d3.event.x + 'px'
+      style.top = t.y + 'px'
+      style.left = t.x + 'px'
     }
 
     const name = t.active ? t.d.name : ''

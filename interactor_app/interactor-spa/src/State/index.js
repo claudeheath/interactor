@@ -16,13 +16,16 @@ const State = {
   addLinkSelectedFromNode: null,
   addingItemsToGroup: false,
   deleteProjectCheckWithUser: false,
+  projectSaveVersionHasChanged: false,
   message: '',
   nodeLU: {},
   workspaceTranslate: {x: 0, y: 0},
   tooltip: {
     active: false,
     type: null,
-    d: null
+    d: null,
+    x: 0,
+    y: 0
   }
 }
 
@@ -91,14 +94,22 @@ State.action = function(type, param) {
        if(err !== null)
         State.action('projectSaveError')
        else
-        State.action('projectSaveSuccess')
+        State.action('projectSaveSuccess', {
+          saveVersion: ret.save_version
+        })
      })
     break
   case 'projectSaveError':
     State.message = 'Error saving project'
     break
   case 'projectSaveSuccess':
+    State.project.save_version = param.saveVersion
+    State.projectSaveVersionHasChanged = false
     State.message = 'Project saved'
+    break
+  case 'updateProjectSaveVersionHasChanged':
+    State.projectSaveVersionHasChanged = param
+    // console.log('hasChanged', State.projectSaveVersionHasChanged)
     break
   case 'deleteProject':
     State.deleteProjectCheckWithUser = true
@@ -184,8 +195,6 @@ State.action = function(type, param) {
     updateNodeLU()
     break
   case 'uploadNodeImage':
-    var node = State.selectedNode
-
     if(param === undefined) {
       State.message = 'Please choose an image to upload'
       break
@@ -207,26 +216,24 @@ State.action = function(type, param) {
     var fd = new window.FormData()
     fd.append("image", param)
 
-    d3.json(`/api/uploadimage/${State.project.id}/${node.id}`)
+    d3.json(`/api/uploadimage/${State.project.id}/${State.selectedNode.id}`)
       .header("X-Requested-With", "XMLHttpRequest")
       .header("X-CSRFToken", csrftoken)
       .post(fd, function(err, ret) {
          State.action('setNodeImageUrl', {
-           node: node,
+           node: State.selectedNode,  // I'm not sure how robust this is... what if the user clicks another node before this returns? A better way is for the API to return the node id and we update according to that
            url: ret.url
          })
       })
 
     break
   case 'deleteNodeImage':
-    var node = State.selectedNode
-
-    d3.json(`/api/deletenodeimage/${State.project.id}/${node.id}`)
+    d3.json(`/api/deletenodeimage/${State.project.id}/${State.selectedNode.id}`)
       .header("X-Requested-With", "XMLHttpRequest")
       .header("X-CSRFToken", csrftoken)
       .post('', function(err, ret) {
          State.action('setNodeImageUrl', {
-           node: node,
+           node: State.selectedNode,  // I'm not sure how robust this is... what if the user clicks another node before this returns?
            url: null
          })
       })
@@ -314,6 +321,8 @@ State.action = function(type, param) {
     State.tooltip.active = param.active
     State.tooltip.d = param.d
     State.tooltip.type = param.type
+    State.tooltip.x = d3.event.x
+    State.tooltip.y = d3.event.y
     // updateList = ['tooltip']
     break
 

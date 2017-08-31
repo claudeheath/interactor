@@ -6,7 +6,8 @@ class Project(models.Model):
     # user = models.ForeignKey(User, related_name="users")
     name = models.CharField(max_length=100)
     description = models.CharField(max_length=500)
-    graph_version = models.IntegerField(default=1)
+    graph_version = models.IntegerField(default=1) # only used to support project history (not implemented yet)
+    save_version = models.IntegerField(default=1) # used to check whether project has changed (mainly for shared projects)
     collaborators = models.CharField(max_length=2000) # comma separated list of emails. A user with an email on this list can view/edit this project.
     def is_collaborator(self, email):
         collaboratorEmails = ''.join(self.collaborators.split()).split(',')
