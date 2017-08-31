@@ -17,15 +17,18 @@ def home(request):
 def dashboard(request):
     user = request.user
 
-    #TODO deal with invalid id
     user = User.objects.get(pk=user.id)
 
     project_list = user.project_set.all()
 
+    # Also collect shared projects
+    shared_project_list = Project.objects.filter(collaborators__contains=user.email)
+
     template = loader.get_template('interactor_app/dashboard.html')
 
     context = {
-        'project_list': project_list
+        'project_list': project_list,
+        'shared_project_list': shared_project_list,
     }
 
     return HttpResponse(template.render(context, request))

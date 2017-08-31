@@ -11,5 +11,18 @@
   <p>No projects yet</p>
 {% endif %}
 
+<h3>Shared projects</h3>
+{% if shared_project_list %}
+  <ul>
+  {% for project in shared_project_list %}
+    <li>{{ project.name }} <a href="{% url 'project' project.id %}">Open</a></li>
+  {% endfor %}
+  </ul>
+{% else %}
+  <p>No shared projects yet</p>
+{% endif %}
+
+
+
 <a href="{% url 'new-project' %}">New project</a>
 {% endblock %}
