@@ -12,6 +12,14 @@ class Sidebar extends Component {
     this.props.state.action('saveProject')
   }
 
+  handleDeleteClick() {
+    this.props.state.action('deleteProject')
+  }
+
+  handleCancelDeleteClick() {
+    this.props.state.action('cancelDeleteProject')
+  }
+
   render() {
     const s = this.props.state
 
@@ -26,6 +34,12 @@ class Sidebar extends Component {
         <div className="ispa-sidebar-form">
           <div className="ispa-item">
             <div className="ispa-button" onClick={this.handleSaveClick.bind(this)}>Save project</div>
+          </div>
+
+          <div className="ispa-item">
+            {this.props.state.deleteProjectCheckWithUser ? null : <div className="ispa-button" onClick={this.handleDeleteClick.bind(this)}>Delete project</div>}
+            {this.props.state.deleteProjectCheckWithUser ? <div className="ispa-button" onClick={this.handleCancelDeleteClick.bind(this)}>Cancel delete project</div> : null}
+            {this.props.state.deleteProjectCheckWithUser ? <div><a href={"/editor/delete-project/" + this.props.state.project.id}>Ok to delete</a></div> : null}
           </div>
 
           <div className="ispa-item">

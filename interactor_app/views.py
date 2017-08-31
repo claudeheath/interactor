@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import Http404, HttpResponse
 from django.template import loader
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -88,3 +88,15 @@ def new_project(request):
     graph.save()
 
     return redirect('project', project_id=project.id)
+
+
+@login_required
+def delete_project(request, project_id):
+    project = Project.objects.get(pk=project_id)
+
+    if not(project.user.id == request.user.id):
+        raise Http404("You don't have authorisation to delete this project")
+
+    project.delete()
+
+    return redirect('dashboard')

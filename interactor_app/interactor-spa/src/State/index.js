@@ -15,6 +15,7 @@ const State = {
   addingLink: false,
   addLinkSelectedFromNode: null,
   addingItemsToGroup: false,
+  deleteProjectCheckWithUser: false,
   message: '',
   nodeLU: {},
   workspaceTranslate: {x: 0, y: 0},
@@ -86,7 +87,7 @@ State.action = function(type, param) {
      .header("Content-Type", "application/json")
      .header("X-CSRFToken", csrftoken)
      .post(JSON.stringify(State.project), function(err, ret) {
-       console.log('POST request', err, ret)
+      //  console.log('POST request', err, ret)
        if(err !== null)
         State.action('projectSaveError')
        else
@@ -99,7 +100,12 @@ State.action = function(type, param) {
   case 'projectSaveSuccess':
     State.message = 'Project saved'
     break
-
+  case 'deleteProject':
+    State.deleteProjectCheckWithUser = true
+    break
+  case 'cancelDeleteProject':
+    State.deleteProjectCheckWithUser = false
+    break
 
   /* Node actions */
   case 'selectNode':
