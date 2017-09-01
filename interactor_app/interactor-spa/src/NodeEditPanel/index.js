@@ -50,7 +50,10 @@ class NodeEditPanel extends Component {
             </div>
 
             <div className="ispa-item">
-              <div>&#x25CB; &#x25EF;</div>
+              <div>
+                <svg width="245px" height="12px"><circle cx="5" cy="6" r="2" style={{fill: 'none', stroke: '#333', strokeWidth: 1}}/></svg>
+                <svg width="12px" height="12px"><circle cx="6" cy="6" r="5" style={{fill: 'none', stroke: '#333', strokeWidth: 1}}/></svg>
+              </div>
               <SliderControl min="0" max="150" state={this.props.state} value={this.props.state.selectedNode.size} callback={this.handleNodeSizeChange.bind(this)} />
             </div>
 

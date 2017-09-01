@@ -1,4 +1,5 @@
 .ispa-graphview-tooltip {
+  font-family: 'Roboto', sans-serif;
   position: absolute;
   display: none;
   width: 300px;

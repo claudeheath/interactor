@@ -1,0 +1,12 @@
+#dashboard h1 {
+  margin-bottom: 20px;
+}
+
+#dashboard .item {
+  padding: 5px;
+  color: #777;
+}
+
+#dashboard .project-list {
+  margin-bottom: 40px;
+}

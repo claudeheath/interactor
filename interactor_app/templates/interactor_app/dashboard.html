@@ -1,28 +1,43 @@
 {% extends "interactor_app/base.html" %}
+{% load staticfiles %}
+
+{% block css %}
+<link href="{% static "interactor_app/css/dashboard.css" %}" rel="stylesheet">
+{% endblock %}
 
 {% block content %}
-{% if project_list %}
-  <ul>
-  {% for project in project_list %}
-    <li>{{ project.name }} <a href="{% url 'project' project.id %}">Open</a></li>
-  {% endfor %}
-  </ul>
-{% else %}
-  <p>No projects yet</p>
-{% endif %}
+<div id="dashboard">
+  <h1>InterActor</h1>
+  <h3>My projects</h3>
+  <table class="project-list">
+    {% if project_list %}
+      {% for project in project_list %}
+        <tr>
+          <td class="item">{{ project.name }}</td>
+          <td><a href="{% url 'project' project.id %}">Open</a></td>
+        </tr>
+      {% endfor %}
+    {% else %}
+      <tr><td class="item">No projects yet</td></tr>
+    {% endif %}
+  </table>
 
-<h3>Shared projects</h3>
-{% if shared_project_list %}
-  <ul>
-  {% for project in shared_project_list %}
-    <li>{{ project.name }} <a href="{% url 'project' project.id %}">Open</a></li>
-  {% endfor %}
-  </ul>
-{% else %}
-  <p>No shared projects yet</p>
-{% endif %}
+  <h3>Shared projects</h3>
+  <table class="project-list">
+    {% if shared_project_list %}
+      {% for project in shared_project_list %}
+        <tr>
+          <td class="item">{{ project.name }}</td>
+          <td><a href="{% url 'project' project.id %}">Open</a></td>
+        </tr>
+      {% endfor %}
+    {% else %}
+      <tr><td class="item">No shared projects yet</td></tr>
+    {% endif %}
+  </table>
+</div>
 
-
-
-<a href="{% url 'new-project' %}">New project</a>
+<div class="new-project">
+  <a href="{% url 'new-project' %}">Start a new project</a>
+</div>
 {% endblock %}

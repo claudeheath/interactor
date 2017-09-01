@@ -39,7 +39,10 @@ class LinkEditPanel extends Component {
             </div>
 
             <div className="ispa-item">
-              <div>| &#x025AE;</div>
+              <div>
+                <svg width="245px" height="15px"><line x1="5" y1="0" x2="5" y2="15" style={{stroke: '#333', strokeWidth: 1}}/></svg>
+                <svg width="10px" height="15px"><line x1="5" y1="0" x2="5" y2="15" style={{stroke: '#333', strokeWidth: 5}}/></svg>
+              </div>
               <SliderControl min="1" max="60" state={this.props.state} value={this.props.state.selectedLink.width} callback={this.handleLinkWidthChange.bind(this)} />
             </div>
 

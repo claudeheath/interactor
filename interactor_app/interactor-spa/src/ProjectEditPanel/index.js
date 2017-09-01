@@ -20,6 +20,7 @@ class ProjectEditPanel extends Component {
 
   render() {
     const hasCollaborators = this.props.state.project.collaborators !== undefined
+    const sharePath = window.location.href
     return (
       <div className="ispa-sidebar-form">
         <div className="ispa-project-edit-panel">
@@ -34,10 +35,14 @@ class ProjectEditPanel extends Component {
             </div>
 
             {hasCollaborators ?
-              <div className="ispa-item">
-                <div>Who can edit this project? (Enter email addresses separated by commas)</div>
-                <div><textarea rows="10" cols="40" value={this.props.state.project.collaborators} onChange={this.handleProjectCollaboratorsChange.bind(this)} /></div>
-                <div>Share this location:</div><div>{window.location.href}</div><div>with your collaborators</div>
+              <div>
+                <div className="ispa-item">
+                  <div>Who can edit this project? (Enter email addresses separated by commas)</div>
+                  <div><textarea rows="10" cols="40" value={this.props.state.project.collaborators} onChange={this.handleProjectCollaboratorsChange.bind(this)} /></div>
+                </div>
+                <div className="ispa-item">
+                  <div>Share this location with your collaborators:</div><div className="ispa-share-path">{sharePath}</div>
+                </div>
               </div> :
               <div></div>
             }

@@ -22,6 +22,15 @@
 }
 
 .ispa-sidebar .ispa-sidebar-form input, .ispa-sidebar .ispa-sidebar-form textarea {
-  padding: 5px;
   max-width: 240px;
+  font-size: 13px;
+  font-family: 'Roboto', sans-serif;
+  color: #333;
+  border: none;
+  padding: 8px;
+  margin-top: 5px;
+}
+
+.ispa-sidebar .ispa-ok-to-delete a {
+  font-size: 12px;
 }

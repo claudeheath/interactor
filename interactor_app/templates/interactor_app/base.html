@@ -4,6 +4,7 @@
 <head>
   <meta charset="utf-8">
   <title>InterActor</title>
+  <link href="https://fonts.googleapis.com/css?family=Oswald|Roboto:400,700" rel="stylesheet">
   <link href="{% static "interactor_app/css/interactor.css" %}" rel="stylesheet">
   {% block css %}{% endblock %}
 </head>
@@ -24,11 +25,11 @@
 
   <div id="user">
     {% if request.user.is_authenticated %}
-      You're logged in as {{ request.user.username }}
-      <a href="{% url "logout" %}">Logout</a>
+      <div class="item">You're logged in as {{ request.user.username }}</div>
+      <div class="item"><a href="{% url "logout" %}">Logout</a></div>
     {% else %}
-      <a href="{% url "login" %}">Log-in</a>
-      <a href="{% url "register" %}">Register</a>
+      <div class="item"><a href="{% url "login" %}">Log-in</a></div>
+      <div class="item"><a href="{% url "register" %}">Register</a></div>
     {% endif %}
   </div>
 

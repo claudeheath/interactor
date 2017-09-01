@@ -26,6 +26,8 @@ class Sidebar extends Component {
     return (
       <div className="ispa-sidebar">
 
+        <h2>InterActor (alpha)</h2>
+
         {s.selectedNode === null && s.selectedLink === null && s.selectedGroup === null ? <ProjectEditPanel state={s} /> : null}
         {s.selectedNode !== null ? <NodeEditPanel state={s} /> : null}
         {s.selectedLink !== null ? <LinkEditPanel state={s} /> : null}
@@ -40,16 +42,16 @@ class Sidebar extends Component {
           <div className="ispa-item">
             {this.props.state.deleteProjectCheckWithUser ? null : <div className="ispa-button" onClick={this.handleDeleteClick.bind(this)}>Delete project</div>}
             {this.props.state.deleteProjectCheckWithUser ? <div className="ispa-button" onClick={this.handleCancelDeleteClick.bind(this)}>Cancel delete project</div> : null}
-            {this.props.state.deleteProjectCheckWithUser ? <div><a href={"/editor/delete-project/" + this.props.state.project.id}>Ok to delete</a></div> : null}
+            {this.props.state.deleteProjectCheckWithUser ? <div className="ispa-ok-to-delete"><a href={"/editor/delete-project/" + this.props.state.project.id}>Confirm delete project</a></div> : null}
           </div>
 
           <div className="ispa-item">
-            <div><a href="/editor/dashboard">Dashboard</a></div>
+            <div><a href="/editor/dashboard">Back to Dashboard</a></div>
           </div>
 
-          <div className="ispa-item">
+          {/*}<div className="ispa-item">
             <div><a href="/account/logout">Logout</a></div>
-          </div>
+          </div>*/}
         </div>
 
       </div>

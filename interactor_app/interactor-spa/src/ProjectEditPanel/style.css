@@ -1,0 +1,10 @@
+.ispa-project-edit-panel .ispa-share-path {
+  max-width: 240px;
+  font-size: 13px;
+  font-family: 'Roboto', sans-serif;
+  color: #333;
+  border: none;
+  padding: 8px;
+  margin-top: 5px;
+  background-color: white;
+}

@@ -3,11 +3,16 @@ body {
   height: 100%;
   margin: 0;
 
-  font-family: sans-serif;
+  font-family: 'Oswald', sans-serif;
   color: #333;
-  font-size: 14px;
+  font-size: 16px;
 
   position: absolute;
+}
+
+h1, h2, h3, h4 {
+  margin: 0;
+  padding: 0;
 }
 
 #content {
@@ -36,4 +41,17 @@ body {
   background-color: #eee;
   border-left: 1px solid #ddd;
 
+}
+
+#sidebar .item {
+  margin: 20px 0;
+}
+
+a {
+  color: #333;
+  padding: 4px;
+}
+
+a:hover {
+  background-color: #ccc;
 }

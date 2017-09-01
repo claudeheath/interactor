@@ -65,7 +65,8 @@
   stroke-dasharray: 1 1;
 }
 .ispa-graphview .ispa-group text {
-  font-size: 12px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 13px;
   stroke: none;
   fill: #aaa;
 }

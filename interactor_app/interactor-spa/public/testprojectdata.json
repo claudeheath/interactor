@@ -38,6 +38,9 @@
     "links": [
       {"id": 1, "source": 1, "target": 2, "name": "My link", "description": "Link description", "width": 5, "opacity": 80},
       {"id": 2, "source": 1, "target": 4, "name": "Another link", "description": "Link description", "width": 10, "opacity": 80}
+    ],
+    "groups": [
+      {"id": 1, "name": "This is a group", "nodes": [2, 1]}
     ]
   }
 }

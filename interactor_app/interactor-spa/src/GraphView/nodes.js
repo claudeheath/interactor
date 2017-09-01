@@ -64,7 +64,7 @@ function updatingNode(d, p) {
       })
 
     g.select('clipPath circle')
-      .attr('r', d.size - 4)
+      .attr('r', d.size >= 4 ? d.size - 4 : 0)
 
     if(d.imageUrl) {
       g.select('.ispa-image')

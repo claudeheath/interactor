@@ -1,15 +1,28 @@
 .ispa-app-wrapper {
-  font-family: sans-serif;
+  /*font-family: 'Roboto', sans-serif;*/
+  /*font-family: 'Lato', sans-serif;*/
+  font-family: 'Oswald', sans-serif;
+  font-size: 14px;
+  color: #333;
   font-size: 14px;
 }
 
-.ispa-app-wrapper .ispa-button {
-  border: 1px solid #aaa;
-  background-color: #ccc;
-  padding: 10px;
-  display: inline-block;
+.ispa-app-wrapper h2 {
+  margin: 0;
 }
 
-.ispa-app-wrapper .ispa-button:hover {
-  background-color: #aaa;
+.ispa-app-wrapper .ispa-button, .ispa-app-wrapper a {
+  /*border: 1px solid #aaa;*/
+  /*background-color: #ccc;*/
+  padding: 4px;
+  font-size: 16px;
+  text-decoration: none;
+  display: inline-block;
+  cursor: default;
+  color: #333;
+}
+
+.ispa-app-wrapper .ispa-button:hover, .ispa-app-wrapper a:hover {
+  /*border: 1px solid #aaa;*/
+  background-color: #ccc;
 }
