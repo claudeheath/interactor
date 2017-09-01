@@ -38,7 +38,7 @@ Graph.getNextLink = function(links, clickedLink, currentlySelectedLink) {
 
   // First get all links between the 2 nodes
   const matchingLinks = _.filter(links, d => {
-    return (d.source === source && d.target === target) || (d.source === target && d.target === source)
+    return (d.source === source && d.target === target) /*|| (d.source === target && d.target === source)*/
   })
   // console.log(matchingLinks)
 

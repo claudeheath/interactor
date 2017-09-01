@@ -39,33 +39,11 @@ function distanceBetweenPoints(p0, p1) {
   return Math.sqrt(Math.pow(p1.x - p0.x, 2) + Math.pow(p1.y - p0.y, 2));
 }
 
-function midpoint(p0, p1) {
-  return {x: p0.x + (p1.x - p0.x) / 2, y: p0.y + (p1.y - p0.y) / 2}
-}
-
-function dir(p0, p1) {
-  var l = distanceBetweenPoints(p0, p1);
-  return {x: (p1.x - p0.x) / l, y: (p1.y - p0.y) / l}
-}
-
-function orthogonal(dir) {
-  return {x: -dir.y, y: dir.x}
-}
-
-function quadraticMidpoint(p0, p1) {
-  var k = 0.2;
-  var l = distanceBetweenPoints(p0, p1)
-  var d = dir(p0, p1)
-  var orth = orthogonal(d)
-  var mid = midpoint(p0, p1)
-  var kl = l * k
-  return {x: mid.x + kl * orth.x, y: mid.y + kl * orth.y}
-}
-
-function getMidpointOfPath(path) {
-  var length = path.getTotalLength();
-  var midpoint = path.getPointAtLength(length * 0.5);
-  return midpoint;
+function getArrowheadDistance(source, target) {
+  const sourceTargetDistance = distanceBetweenPoints(source, target)
+  const u = target.size / sourceTargetDistance
+  const distanceToArrowhead = (1 - u) * sourceTargetDistance
+  return distanceToArrowhead
 }
 
 function enteringLink(p) {
@@ -75,11 +53,10 @@ function enteringLink(p) {
     .on('mousemove', d => handleMouseMove(d, p))
     .on('mouseleave', d => handleMouseLeave(d, p))
 
-  g.append('path')
+  g.append('line')
     .classed('ispa-pick-layer', true)
-    .style('fill', 'none')
 
-  g.append('path')
+  g.append('line')
     .classed('ispa-halo', true)
     .style('display', 'none')
     .style('stroke', '#aaa')
@@ -91,11 +68,10 @@ function enteringLink(p) {
     .style('stroke-width', '1')
     .style('fill', 'none')
 
-  g.append('path')
+  g.append('line')
     .classed('ispa-line', true)
-    .style('fill', 'none')
     .style('stroke', '#444')
-    // .style('stroke-width', '2')
+    .style('stroke-width', '2')
 }
 
 function updatingLink(d, p) {
@@ -108,34 +84,31 @@ function updatingLink(d, p) {
       return thisIsSelected
     })
 
-  const p0 = {x: lu[d.source].x, y: lu[d.source].y};
-  const p1 = {x: lu[d.target].x, y: lu[d.target].y};
-  const mid = quadraticMidpoint(p0, p1)
+  g.selectAll('line')
+    .attr('x1', lu[d.source].x)
+    .attr('y1', lu[d.source].y)
+    .attr('x2', lu[d.target].x)
+    .attr('y2', lu[d.target].y)
 
-  // Update the curve itself
+  g.select('.ispa-arrowhead')
+    .attr('transform', () => {
+      const s = lu[d.source]
+      const rot = getRotationFromSource(d, lu[d.source], lu[d.target])
+      const arrowHeadDistance = getArrowheadDistance(lu[d.source], lu[d.target])
+      return `translate(${s.x}, ${s.y})rotate(${rot})translate(0,${arrowHeadDistance})`
+    })
+    .attr('d', d => arrowhead(d))
+
+  g.select('.ispa-halo')
+    .style('stroke-width', d.width + 8)
+
   g.select('.ispa-line')
-    .attr('d', 'M' + p0.x + ',' + p0.y + 'Q' + mid.x + ',' + mid.y + ' ' + p1.x + ',' + p1.y)
     .style('stroke-width', d.width)
     .style('stroke-dasharray', d => {
         let width = 1
         const gap = (100 - d.opacity) / 5
         return width + ' ' + gap
     })
-
-  g.select('.ispa-pick-layer')
-    .attr('d', 'M' + p0.x + ',' + p0.y + 'Q' + mid.x + ',' + mid.y + ' ' + p1.x + ',' + p1.y)
-
-  g.select('.ispa-arrowhead')
-    .attr('transform', () => {
-      const rot = getRotationFromSource(d, lu[d.source], lu[d.target])
-      const pos = getMidpointOfPath(g.select('.ispa-line').node())
-      return `translate(${pos.x}, ${pos.y})rotate(${rot})`
-    })
-    .attr('d', d => arrowhead(d))
-
-  g.select('.ispa-halo')
-    .attr('d', 'M' + p0.x + ',' + p0.y + 'Q' + mid.x + ',' + mid.y + ' ' + p1.x + ',' + p1.y)
-    .style('stroke-width', d.width + 8)
 }
 
 links.update = function(p) {

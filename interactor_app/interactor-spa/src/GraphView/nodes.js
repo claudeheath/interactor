@@ -25,20 +25,34 @@ function enteringNode(d, p) {
   const g = d3.select(this)
     .classed('ispa-node', true)
     .call(p.drag)
+    .style('fill', 'white')
+    .style('stroke', '#555')
+    .style('stroke-width', 1)
     .on('click', d => handleClick(d, p))
     .on('mousemove', d => handleMouseMove(d, p))
     .on('mouseleave', d => handleMouseLeave(d, p))
 
-  g.append('circle').classed('ispa-halo', true)
-  g.append('circle').classed('ispa-circle', true)
+  g.append('circle')
+    .classed('ispa-halo', true)
+    .style('display', 'none')
+
+  g.append('circle')
+    .classed('ispa-circle', true)
+
   g.append('defs')
     .append('clipPath')
     .attr('id', 'node-clip-' + d.id)
     .append('circle')
+
   g.append('svg:image')
     .classed('ispa-image', true)
     .attr('clip-path', `url(#node-clip-${d.id})`)
+
   g.append('text')
+    .style('text-anchor', 'middle')
+    .style('font-size', '14px')
+    .style('fill', '#333')
+    .style('stroke', 'none')
   }
 
 function updatingNode(d, p) {

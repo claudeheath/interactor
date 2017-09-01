@@ -12,8 +12,12 @@ class GraphViewTooltip extends Component {
     }
 
     if(t.active) {
-      style.top = t.y + 'px'
-      style.left = t.x + 'px'
+      const windowHeight = window.innerHeight
+      if(t.y > 0.5 * windowHeight)
+        style.bottom = (window.innerHeight - t.y) + 'px'
+      else
+        style.top = (t.y + 5) + 'px'
+      style.left = (t.x + 5) + 'px'
     }
 
     const name = t.active ? t.d.name : ''

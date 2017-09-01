@@ -30,7 +30,16 @@ function enteringGroup(p) {
     .on('mouseleave', d => handleMouseLeave(d, p))
 
   g.append('rect')
+    .style('fill', 'none')
+    .style('stroke', '#aaa')
+    .style('stroke-width', '1')
+    .style('stroke-dasharray', '1 1')
+
   g.append('text')
+    .style('font-family', '"Roboto", sans-serif')
+    .style('font-size', '13px')
+    .style('stroke', 'none')
+    .style('fill', '#aaa')
 }
 
 function getBoundingBoxFromCircles(circles) {
