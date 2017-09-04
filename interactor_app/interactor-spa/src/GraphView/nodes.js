@@ -71,6 +71,8 @@ function updatingNode(d, p) {
     g.select('.ispa-circle')
       .attr('r', d.size)
       .style('stroke-dasharray', d => {
+        if(d.opacity === 100)
+          return 'none'
         let width = (100 - d.opacity) / 5
         width = width > 5 ? 5 : width
         const gap = (100 - d.opacity) / 5

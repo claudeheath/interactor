@@ -2,6 +2,10 @@
   position: relative;
 }
 
+.ispa-graphview svg {
+  overflow: hidden;
+}
+
 /* Node */
 .ispa-graphview .ispa-node .ispa-halo {
   display: none;

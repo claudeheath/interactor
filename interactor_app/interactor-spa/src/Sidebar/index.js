@@ -44,7 +44,7 @@ class Sidebar extends Component {
           </div>
 
           <div className="ispa-item">
-            <div className="ispa-button" onClick={this.handleScreenshotClick.bind(this)}><a>Download screenshot</a></div>
+            <div className="ispa-button" onClick={this.handleScreenshotClick.bind(this)}><a>Download png image</a></div>
           </div>
 
           <div className="ispa-item">
