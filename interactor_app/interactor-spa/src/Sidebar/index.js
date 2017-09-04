@@ -12,6 +12,10 @@ class Sidebar extends Component {
     this.props.state.action('saveProject')
   }
 
+  handleScreenshotClick(e) {
+    this.props.state.action('saveScreenshot', {element: e.target})
+  }
+
   handleDeleteClick() {
     this.props.state.action('deleteProject')
   }
@@ -37,6 +41,10 @@ class Sidebar extends Component {
           <div className="ispa-item">
             <div className="ispa-button" onClick={this.handleSaveClick.bind(this)}>Save project</div>
             {this.props.state.projectSaveVersionHasChanged ? <div>Someone else has saved this project. You can continue to edit but if you save this project it will overwrite their changes. You can load the latest version by clicking your browser's refresh button.</div> : null}
+          </div>
+
+          <div className="ispa-item">
+            <div className="ispa-button" onClick={this.handleScreenshotClick.bind(this)}><a>Download screenshot</a></div>
           </div>
 
           <div className="ispa-item">

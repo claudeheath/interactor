@@ -5,6 +5,7 @@ import {v4 as uuidv4} from 'uuid'
 
 import App from '../App'
 import Graph from '../Graph'
+import Screenshot from '../Screenshot'
 
 
 const State = {
@@ -82,8 +83,6 @@ State.action = function(type, param) {
     if(State.project === null)
       break
 
-    // console.log('csrf', csrftoken)
-
     d3.json('/api/project/' + State.project.id + '/')
       .header("X-Requested-With", "XMLHttpRequest")
      // .header("Content-Type", "application/x-www-form-urlencoded")
@@ -116,6 +115,9 @@ State.action = function(type, param) {
     break
   case 'cancelDeleteProject':
     State.deleteProjectCheckWithUser = false
+    break
+  case 'saveScreenshot':
+    Screenshot.save(param.element, State, 'interactor-diagram.png')
     break
 
   /* Node actions */

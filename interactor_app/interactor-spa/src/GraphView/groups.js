@@ -1,6 +1,8 @@
 import * as _ from 'lodash';
 import * as d3 from 'd3';
 
+import Helpers from '../Helpers'
+
 const groups = {}
 
 function handleGroupClick(d, p) {
@@ -42,24 +44,6 @@ function enteringGroup(p) {
     .style('fill', '#aaa')
 }
 
-function getBoundingBoxFromCircles(circles) {
-  var extents = []
-  _.each(circles, d => {
-    extents.push({x: d.x, y: d.y - d.r})
-    extents.push({x: d.x + d.r, y: d.y})
-    extents.push({x: d.x, y: d.y + d.r})
-    extents.push({x: d.x - d.r, y: d.y})
-  })
-  var boundingBox = {
-    xMin: d3.min(extents, d => d.x),
-    xMax: d3.max(extents, d => d.x),
-    yMin: d3.min(extents, d => d.y),
-    yMax: d3.max(extents, d => d.y),
-  }
-  // console.log(extents, boundingBox)
-  return boundingBox
-}
-
 function updatingGroup(d, p) {
   const g = d3.select(this)
   var lu = p.state.nodeLU
@@ -72,7 +56,7 @@ function updatingGroup(d, p) {
     }
   })
   // console.log(circles)
-  var boundingBox = getBoundingBoxFromCircles(circles)
+  var boundingBox = Helpers.getBoundingBoxFromCircles(circles)
 
   g.select('rect')
     .attr('x', boundingBox.xMin)

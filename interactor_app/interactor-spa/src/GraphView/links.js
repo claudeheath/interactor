@@ -1,4 +1,5 @@
 import * as d3 from 'd3';
+import Helpers from '../Helpers'
 
 const links = {}
 
@@ -25,47 +26,6 @@ function arrowhead(d) {
   let size = d.width ? d.width : 1
   if(size < 6) size = 6
   return `M${-size},${-size} L0,0 L${size},${-size}`
-}
-
-function getRotationFromSource(d, source, target) {
-  const x = target.x - source.x
-  const y = target.y - source.y
-  const a = Math.atan2(x, y) // yes these are deliberately reversed, as we want a clockwise rotation from the vertical...
-  const rot = - 180 * a / Math.PI
-  return rot
-}
-
-function distanceBetweenPoints(p0, p1) {
-  return Math.sqrt(Math.pow(p1.x - p0.x, 2) + Math.pow(p1.y - p0.y, 2));
-}
-
-function midpoint(p0, p1) {
-  return {x: p0.x + (p1.x - p0.x) / 2, y: p0.y + (p1.y - p0.y) / 2}
-}
-
-function dir(p0, p1) {
-  var l = distanceBetweenPoints(p0, p1);
-  return {x: (p1.x - p0.x) / l, y: (p1.y - p0.y) / l}
-}
-
-function orthogonal(dir) {
-  return {x: -dir.y, y: dir.x}
-}
-
-function quadraticMidpoint(p0, p1) {
-  var k = 0.2;
-  var l = distanceBetweenPoints(p0, p1)
-  var d = dir(p0, p1)
-  var orth = orthogonal(d)
-  var mid = midpoint(p0, p1)
-  var kl = l * k
-  return {x: mid.x + kl * orth.x, y: mid.y + kl * orth.y}
-}
-
-function getMidpointOfPath(path) {
-  var length = path.getTotalLength();
-  var midpoint = path.getPointAtLength(length * 0.5);
-  return midpoint;
 }
 
 function enteringLink(p) {
@@ -110,7 +70,7 @@ function updatingLink(d, p) {
 
   const p0 = {x: lu[d.source].x, y: lu[d.source].y};
   const p1 = {x: lu[d.target].x, y: lu[d.target].y};
-  const mid = quadraticMidpoint(p0, p1)
+  const mid = Helpers.quadraticMidpoint(p0, p1)
 
   // Update the curve itself
   g.select('.ispa-line')
@@ -127,8 +87,9 @@ function updatingLink(d, p) {
 
   g.select('.ispa-arrowhead')
     .attr('transform', () => {
-      const rot = getRotationFromSource(d, lu[d.source], lu[d.target])
-      const pos = getMidpointOfPath(g.select('.ispa-line').node())
+      const rot = Helpers.getRotationFromSource(d, p0, p1)
+      // const pos = Helpers.getMidpointOfPath(g.select('.ispa-line').node())
+      const pos = Helpers.getQuadraticMidpoint(p0, p1)
       return `translate(${pos.x}, ${pos.y})rotate(${rot})`
     })
     .attr('d', d => arrowhead(d))
