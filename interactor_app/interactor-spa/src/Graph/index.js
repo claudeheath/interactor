@@ -25,7 +25,8 @@ Graph.addLink = function(graph, source, target) {
     name: 'New link',
     description: 'Link description',
     width: 2,
-    opacity: 100
+    opacity: 100,
+    curvature: 0,
   }
   graph.links.push(newLink)
   return newLink

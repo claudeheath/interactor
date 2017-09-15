@@ -281,6 +281,10 @@ State.action = function(type, param) {
     State.selectedLink.opacity = +param
     State.message = ''
     break
+  case 'setLinkCurvature':
+    State.selectedLink.curvature = +param
+    State.message = ''
+    break
 
   /* Group actions */
   case 'addGroup':

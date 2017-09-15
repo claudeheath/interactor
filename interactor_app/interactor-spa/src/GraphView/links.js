@@ -70,7 +70,8 @@ function updatingLink(d, p) {
 
   const p0 = {x: lu[d.source].x, y: lu[d.source].y};
   const p1 = {x: lu[d.target].x, y: lu[d.target].y};
-  const mid = Helpers.quadraticMidpoint(p0, p1)
+  const k = d.curvature === undefined ? 0.2 : d.curvature
+  const mid = Helpers.quadraticMidpoint(p0, p1, k)
 
   // Update the curve itself
   g.select('.ispa-line')
@@ -89,7 +90,7 @@ function updatingLink(d, p) {
     .attr('transform', () => {
       const rot = Helpers.getRotationFromSource(d, p0, p1)
       // const pos = Helpers.getMidpointOfPath(g.select('.ispa-line').node())
-      const pos = Helpers.getQuadraticMidpoint(p0, p1)
+      const pos = Helpers.getQuadraticMidpoint(p0, p1, k)
       return `translate(${pos.x}, ${pos.y})rotate(${rot})`
     })
     .attr('d', d => arrowhead(d))

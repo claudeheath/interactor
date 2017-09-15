@@ -20,6 +20,10 @@ class LinkEditPanel extends Component {
     this.props.state.action('setLinkOpacity', newValue)
   }
 
+  handleLinkCurvatureChange(newValue) {
+    this.props.state.action('setLinkCurvature', newValue)
+  }
+
   handleDeleteLinkClick() {
     this.props.state.action('deleteLink')
   }
@@ -52,6 +56,15 @@ class LinkEditPanel extends Component {
                 <svg width="15px" height="10px"><line y1="5" x2="15" y2="5" style={{stroke: '#333', strokeWidth: 1}}/></svg>
               </div>
               <SliderControl min="0" max="100" state={this.props.state} value={this.props.state.selectedLink.opacity} callback={this.handleLinkOpacityChange.bind(this)} />
+            </div>
+
+            <div className="ispa-item">
+              <div>
+                <svg width="120px" height="10px"><path d="M0,10 a7.5,7.5 0 0 1 15,0" style={{stroke: '#333', strokeWidth: 1, fill: 'none'}}/></svg>
+                <svg width="120px" height="10px"><line x1="2.5" y1="5" x2="17.5" y2="5" style={{stroke: '#333', strokeWidth: 1}}/></svg>
+                <svg width="15px" height="10px"><path d="M0,2 a7.5,7.5 0 0 0 15,0" style={{stroke: '#333', strokeWidth: 1, fill: 'none'}}/></svg>
+              </div>
+              <SliderControl min="-1" max="1" state={this.props.state} value={this.props.state.selectedLink.curvature} callback={this.handleLinkCurvatureChange.bind(this)} zeroTick={true} />
             </div>
 
             <div className="ispa-item">

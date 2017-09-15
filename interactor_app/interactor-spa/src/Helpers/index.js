@@ -28,8 +28,7 @@ Helpers.getRotationFromSource = function(d, source, target) {
   return rot
 }
 
-Helpers.quadraticMidpoint = function(p0, p1) {
-  var k = 0.2;
+Helpers.quadraticMidpoint = function(p0, p1, k) {
   var l = distanceBetweenPoints(p0, p1)
   var d = dir(p0, p1)
   var orth = orthogonal(d)
@@ -38,9 +37,9 @@ Helpers.quadraticMidpoint = function(p0, p1) {
   return {x: mid.x + kl * orth.x, y: mid.y + kl * orth.y}
 }
 
-Helpers.getQuadraticMidpoint = function(p0, p1) {
+Helpers.getQuadraticMidpoint = function(p0, p1, k) {
   const t = 0.5
-  const midpoint = Helpers.quadraticMidpoint(p0, p1)
+  const midpoint = Helpers.quadraticMidpoint(p0, p1, k)
   const x = (1 - t) * (1 - t) * p0.x + 2 * (1 - t) * t * midpoint.x + t * t * p1.x;
   const y = (1 - t) * (1 - t) * p0.y + 2 * (1 - t) * t * midpoint.y + t * t * p1.y;
   return {x: x, y: y}

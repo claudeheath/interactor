@@ -20,34 +20,21 @@ class SliderControl extends Component {
     this.props.callback(newValue)
   }
 
-  update() {
-    d3.select(this.d3element)
-      .select('circle')
-      .attr('cx', this.scale(this.props.value))
-  }
-
   componentDidMount() {
-    this.scale.domain([this.props.min, this.props.max])
-
     d3.select(this.d3element)
       .select('circle')
       .call(this.drag)
-
-    this.update()
   }
-
-  componentDidUpdate() {
-    this.update()
-  }
-
 
   render() {
+    this.scale.domain([this.props.min, this.props.max])
     return (
       <div className="ispa-slider-control">
         <svg width="260px" height="12px" ref={e => this.d3element = e} >
           <g transform="translate(10, 6)">
             <line x2="240px" ></line>
-            <circle r="6"></circle>
+            {this.props.zeroTick === true ? <line x1={this.scale(0)} y1="-5" x2={this.scale(0)} y2="5" /> : ''}
+            <circle r="6" cx={this.scale(this.props.value)}></circle>
           </g>
         </svg>
       </div>
