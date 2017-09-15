@@ -119,6 +119,11 @@ State.action = function(type, param) {
   case 'saveScreenshot':
     Screenshot.save(param.element, State, 'interactor-diagram.png')
     break
+  case 'saveJSON':
+    const data =  "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(State.project, null, 2))
+    param.element.href = data
+    param.element.download = 'interactor.json'
+    break
 
   /* Node actions */
   case 'selectNode':

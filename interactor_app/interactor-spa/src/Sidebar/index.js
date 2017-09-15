@@ -16,6 +16,10 @@ class Sidebar extends Component {
     this.props.state.action('saveScreenshot', {element: e.target})
   }
 
+  handleDownloadJSONClick(e) {
+    this.props.state.action('saveJSON', {element: e.target})
+  }
+
   handleDeleteClick() {
     this.props.state.action('deleteProject')
   }
@@ -45,6 +49,10 @@ class Sidebar extends Component {
 
           <div className="ispa-item">
             <div className="ispa-button" onClick={this.handleScreenshotClick.bind(this)}><a>Download png image</a></div>
+          </div>
+
+          <div className="ispa-item">
+            <div className="ispa-button" onClick={this.handleDownloadJSONClick.bind(this)}><a>Download JSON</a></div>
           </div>
 
           <div className="ispa-item">

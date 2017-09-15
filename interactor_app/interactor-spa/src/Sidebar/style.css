@@ -12,6 +12,8 @@
 
   background-color: #eee;
   border-left: 1px solid #ddd;
+
+  overflow-y: scroll;
 }
 
 .ispa-sidebar .ispa-sidebar-form {

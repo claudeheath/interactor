@@ -28,15 +28,15 @@ class GraphViewTooltip extends Component {
     case 'node':
       fields = <div>
         <div className="ispa-item">{description}</div>
-        {t.d.size ? <div className="ispa-item"><span className="ispa-key">Size: </span>{t.d.size.toFixed()}</div> : null}
-        {t.d.opacity ? <div className="ispa-item"><span className="ispa-key">Strength: </span>{t.d.opacity.toFixed()}</div> : null}
+        {/*t.d.size ? <div className="ispa-item"><span className="ispa-key">Size: </span>{t.d.size.toFixed()}</div> : null*/}
+        {/*t.d.opacity ? <div className="ispa-item"><span className="ispa-key">Strength: </span>{t.d.opacity.toFixed()}</div> : null*/}
       </div>
       break
     case 'link':
       fields = <div>
         <div className="ispa-item">{description}</div>
-        {t.d.width ? <div className="ispa-item"><span className="ispa-key">Width: </span>{t.d.width.toFixed()}</div> : null}
-        {t.d.opacity ? <div className="ispa-item"><span className="ispa-key">Strength: </span>{t.d.opacity.toFixed()}</div> : null}
+        {/*t.d.width ? <div className="ispa-item"><span className="ispa-key">Width: </span>{t.d.width.toFixed()}</div> : null*/}
+        {/*t.d.opacity ? <div className="ispa-item"><span className="ispa-key">Strength: </span>{t.d.opacity.toFixed()}</div> : null*/}
       </div>
       break
     case 'group':
