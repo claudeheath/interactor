@@ -82,7 +82,7 @@ def upload_image(request, project_id, node_id):
     # use the node id as the image filename. I think this makes things easier in the long run.
     # for example, if a new image is uploaded, it'll automatically replace the existing one
     # it's also easier to keep track of which image belongs to which node
-    new_filename = node_id + image_extension
+    new_filename = node_id + '.png'
     filename = fs.save('node_images/' + project_id + '/' + new_filename, myfile)
     uploaded_file_url = fs.url(filename)
 
