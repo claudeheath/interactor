@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import Http404, HttpResponse
 from django.template import loader
 from django.contrib import messages
@@ -36,12 +36,10 @@ def dashboard(request):
 
 @login_required
 def project(request, project_id):
+    project = get_object_or_404(Project, id=project_id)
 
-    project = Project.objects.get(pk=project_id)
-
-    #TODO deal with invalid id  (see https://docs.djangoproject.com/en/1.11/intro/tutorial04/)
-    if not(project.user.id == request.user.id or project.is_collaborator(request.user.email)):
-        raise Http404("You don't have authorisation to open this project")
+    if not(request.user.is_staff or project.user.id == request.user.id or project.is_collaborator(request.user.email)):
+        return render(request, 'interactor_app/project_not_authorised.html')
 
     return render(request, 'interactor_app/project.html', {
         'project': project,
@@ -71,7 +69,7 @@ def new_project(request):
 
 @login_required
 def delete_project(request, project_id):
-    project = Project.objects.get(pk=project_id)
+    project = get_object_or_404(Project, id=project_id)
 
     if not(project.user.id == request.user.id):
         raise Http404("You don't have authorisation to delete this project")

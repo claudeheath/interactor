@@ -18,7 +18,7 @@ def project(request, project_id):
         raise Http404
 
     if request.method == 'GET':
-        if not(project.user.id == request.user.id or project.is_collaborator(request.user.email)):
+        if not(request.user.is_staff or project.user.id == request.user.id or project.is_collaborator(request.user.email)):
             raise Http404
 
         # Until we implement project history, always use version 1 of the graph
@@ -39,6 +39,8 @@ def project(request, project_id):
         return JsonResponse(data)
 
     elif request.method == 'POST':
+        if not(project.user.id == request.user.id or project.is_collaborator(request.user.email)):
+            raise Http404
 
         graph = project.graph_set.get(version=1)
 

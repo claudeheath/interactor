@@ -23,6 +23,10 @@
   margin: 20px 0;
 }
 
+.ispa-sidebar .ispa-sidebar-form .ispa-item .ispa-subtitle {
+  font-size: 0.8em;
+}
+
 .ispa-sidebar .ispa-sidebar-form input, .ispa-sidebar .ispa-sidebar-form textarea {
   max-width: 240px;
   font-size: 13px;

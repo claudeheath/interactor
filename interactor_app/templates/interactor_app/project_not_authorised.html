@@ -1,0 +1,7 @@
+{% extends "interactor_app/base.html" %}
+
+{% block content %}
+{% if user.is_authenticated %}
+Sorry! You're not authorised to open this project. Please contact the project's owner and ask them to share the project with you.
+{% endif %}
+{% endblock %}
