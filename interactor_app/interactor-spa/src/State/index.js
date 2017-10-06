@@ -41,6 +41,15 @@ function updateNodeLU() {
   // console.log('nodeLU', State.nodeLU)
 }
 
+function setDefaults() {
+  // Set undefined parameters to default values
+  // (Project representations may change as app evolves (e.g. new parameters get added) so this safeguards against undefined values)
+  _.each(State.project.representation.nodes, d => {
+    if(d.thickness === undefined)
+      d.thickness = 1
+  })
+}
+
 State.action = function(type, param) {
   // console.log('action', type, param)
   // console.log('representation', State.project ? State.project.representation : '')
@@ -52,6 +61,7 @@ State.action = function(type, param) {
   /* Project */
   case 'setProjectData':
     State.project = param
+    setDefaults()
     State.tooltip.active = false
     updateNodeLU()
     break
@@ -167,6 +177,10 @@ State.action = function(type, param) {
     break
   case 'setNodeSize':
     State.selectedNode.size = +param
+    State.message = ''
+    break
+  case 'setNodeThickness':
+    State.selectedNode.thickness = +param
     State.message = ''
     break
   case 'setNodeOpacity':

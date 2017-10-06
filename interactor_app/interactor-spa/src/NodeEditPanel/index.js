@@ -16,6 +16,10 @@ class NodeEditPanel extends Component {
     this.props.state.action('setNodeSize', newValue)
   }
 
+  handleNodeThicknessChange(newValue) {
+    this.props.state.action('setNodeThickness', newValue)
+  }
+
   handleNodeOpacityChange(newValue) {
     this.props.state.action('setNodeOpacity', newValue)
   }
@@ -55,6 +59,14 @@ class NodeEditPanel extends Component {
                 <svg width="12px" height="12px"><circle cx="6" cy="6" r="5" style={{fill: 'none', stroke: '#333', strokeWidth: 1}}/></svg>
               </div>
               <SliderControl min="0" max="150" state={this.props.state} value={this.props.state.selectedNode.size} callback={this.handleNodeSizeChange.bind(this)} />
+            </div>
+
+            <div className="ispa-item">
+              <div>
+                <svg width="245px" height="15px"><line x1="5" y1="0" x2="5" y2="15" style={{stroke: '#333', strokeWidth: 1}}/></svg>
+                <svg width="10px" height="15px"><line x1="5" y1="0" x2="5" y2="15" style={{stroke: '#333', strokeWidth: 5}}/></svg>
+              </div>
+              <SliderControl min="0" max="20" state={this.props.state} value={this.props.state.selectedNode.thickness} callback={this.handleNodeThicknessChange.bind(this)} />
             </div>
 
             <div className="ispa-item">

@@ -13,6 +13,7 @@
         "x": 100,
         "y": 100,
         "size": 30,
+        "thickness": 10,
         "opacity": 80
       },
       {

@@ -66,11 +66,16 @@ function updatingNode(d, p) {
       })
 
     g.select('.ispa-halo')
-      .attr('r', d => d.size + 5)
+      .attr('r', () => {
+        return d.size + (0.5 * d.thickness) + 5
+      })
 
     g.select('.ispa-circle')
       .attr('r', d.size)
-      .style('stroke-dasharray', d => {
+      .style('stroke-width', () => {
+        return +d.thickness
+      })
+      .style('stroke-dasharray', () => {
         if(d.opacity === 100)
           return 'none'
         let width = (100 - d.opacity) / 5
@@ -80,7 +85,7 @@ function updatingNode(d, p) {
       })
 
     g.select('clipPath circle')
-      .attr('r', d.size >= 4 ? d.size - 4 : 0)
+      .attr('r', d.size >= 4 ? d.size - (0.5 * d.thickness) - 4 : 0)
 
     if(d.imageUrl) {
       g.select('.ispa-image')
