@@ -49,7 +49,8 @@ function drawGroups(context, groups, lu) {
       return {
         x: lu[d].x,
         y: lu[d].y,
-        r: lu[d].size
+        r: lu[d].size,
+        thickness: lu[d].thickness
       }
     })
     var boundingBox = Helpers.getBoundingBoxFromCircles(circles)
@@ -58,7 +59,7 @@ function drawGroups(context, groups, lu) {
 
     context.stroke()
 
-    context.font = "13px 'Roboto', sans-serif"
+    context.font = "13px 'Open Sans', sans-serif"
     context.fillStyle = '#aaa'
     context.fillText(d.name, boundingBox.xMin, boundingBox.yMin - 6)
 
@@ -133,27 +134,27 @@ function drawNodes(context, nodes) {
     .each(function(d) {
       context.save()
 
-      let width = (100 - d.opacity) / 5
-      width = width > 5 ? 5 : width
-      const gap = (100 - d.opacity) / 5
-      context.setLineDash([width, gap])
+      let lineDashWidth = (100 - d.opacity) / 5
+      lineDashWidth = lineDashWidth > 5 ? 5 : lineDashWidth
+      const lineDashGap = (100 - d.opacity) / 5
+      context.setLineDash([lineDashWidth, lineDashGap])
 
-      context.lineWidth = d.width
+      context.lineWidth = d.thickness
       context.fillStyle = 'white'
 
       context.beginPath()
       context.arc(d.x, d.y, d.size, 0, 2 * Math.PI)
-      context.stroke()
       context.fill()
+      context.stroke()
 
-      context.font = "14px 'Oswald', sans-serif"
-      context.fillStyle = '#333'
+      context.font = "12px 'Open Sans', sans-serif"
+      context.fillStyle = '#555'
       context.textAlign = "center"
-      context.fillText(d.name, d.x, d.y + d.size + 16)
+      context.fillText(d.name, d.x, d.y + d.size + (0.5 * d.thickness) + 14)
 
       if(d.imageUrl) {
         context.beginPath()
-        context.arc(d.x, d.y, d.size >= 4 ? d.size - 4 : 0, 0, 2 * Math.PI)
+        context.arc(d.x, d.y, d.size >= 4 ? d.size - (0.5 * d.thickness) - 4 : 0, 0, 2 * Math.PI)
         context.clip()
 
         var img = d3.select(this).select('image').node()
@@ -171,7 +172,7 @@ Screenshot.save = function(link, state, filename) {
 
   const bounds = getBounds(project.representation.nodes)
 
-  const scaleFactor = 2
+  const scaleFactor = 4
 
   canvas.width = scaleFactor * (bounds.maxX - bounds.minX)
   canvas.height = scaleFactor * (bounds.maxY - bounds.minY)

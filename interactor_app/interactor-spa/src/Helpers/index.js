@@ -48,10 +48,10 @@ Helpers.getQuadraticMidpoint = function(p0, p1, k) {
 Helpers.getBoundingBoxFromCircles = function(circles) {
   var extents = []
   _.each(circles, d => {
-    extents.push({x: d.x, y: d.y - d.r})
-    extents.push({x: d.x + d.r, y: d.y})
-    extents.push({x: d.x, y: d.y + d.r})
-    extents.push({x: d.x - d.r, y: d.y})
+    extents.push({x: d.x, y: d.y - d.r - (0.5 * d.thickness)})
+    extents.push({x: d.x + d.r + (0.5 * d.thickness), y: d.y})
+    extents.push({x: d.x, y: d.y + d.r + (0.5 * d.thickness)})
+    extents.push({x: d.x - d.r - (0.5 * d.thickness), y: d.y})
   })
   var boundingBox = {
     xMin: d3.min(extents, d => d.x),

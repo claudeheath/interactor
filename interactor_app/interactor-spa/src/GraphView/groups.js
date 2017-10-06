@@ -38,7 +38,7 @@ function enteringGroup(p) {
     .style('stroke-dasharray', '1 1')
 
   g.append('text')
-    .style('font-family', '"Roboto", sans-serif')
+    .style('font-family', '"Open Sans", sans-serif')
     .style('font-size', '13px')
     .style('stroke', 'none')
     .style('fill', '#aaa')
@@ -52,7 +52,8 @@ function updatingGroup(d, p) {
     return {
       x: lu[d].x,
       y: lu[d].y,
-      r: lu[d].size
+      r: lu[d].size,
+      thickness: lu[d].thickness
     }
   })
   // console.log(circles)

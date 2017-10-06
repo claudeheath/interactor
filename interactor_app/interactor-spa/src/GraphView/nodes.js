@@ -27,7 +27,6 @@ function enteringNode(d, p) {
     .call(p.drag)
     .style('fill', 'white')
     .style('stroke', '#555')
-    .style('stroke-width', 1)
     .on('click', d => handleClick(d, p))
     .on('mousemove', d => handleMouseMove(d, p))
     .on('mouseleave', d => handleMouseLeave(d, p))
@@ -50,7 +49,7 @@ function enteringNode(d, p) {
 
   g.append('text')
     .style('text-anchor', 'middle')
-    .style('font-size', '14px')
+    .style('font-size', '12px')
     .style('fill', '#333')
     .style('stroke', 'none')
   }
@@ -100,7 +99,7 @@ function updatingNode(d, p) {
     }
 
     g.select('text')
-      .attr('y', d.size + 16)
+      .attr('y', d.size + (0.5 * d.thickness) + 14)
       .text(d.name)
   }
 

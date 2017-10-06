@@ -1,6 +1,6 @@
 .ispa-sidebar {
   width: 310px;
-  padding: 20px 10px 0 20px;
+  padding: 10px 10px 0 20px;
   box-sizing: border-box;
 
   position: absolute;
@@ -16,11 +16,18 @@
   overflow-y: scroll;
 }
 
+.ispa-sidebar h2 {
+  font-family: 'Slabo 27px', serif;
+  font-size: 27px;
+}
+
 .ispa-sidebar .ispa-sidebar-form {
 }
 
 .ispa-sidebar .ispa-sidebar-form .ispa-item {
   margin: 20px 0;
+  font-size: 13px;
+  line-height: 16px;
 }
 
 .ispa-sidebar .ispa-sidebar-form .ispa-item .ispa-subtitle {
