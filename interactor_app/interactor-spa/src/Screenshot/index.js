@@ -172,7 +172,7 @@ Screenshot.save = function(link, state, filename) {
 
   const bounds = getBounds(project.representation.nodes)
 
-  const scaleFactor = 4
+  const scaleFactor = 2
 
   canvas.width = scaleFactor * (bounds.maxX - bounds.minX)
   canvas.height = scaleFactor * (bounds.maxY - bounds.minY)
